@@ -23,18 +23,31 @@ Architecturally, a Sidetree network is a network consisting of multiple logical 
 | Term                  | Description                                                                    |
 |-----------------------|--------------------------------------------------------------------------------|
 | Anchor file           | The file containing metadata of a batch of Sidetree operations, of which the hash is written to the blockchain as a Sidetree transaction. |
+|                       | Sidetreeオペレーションのバッチ処理のメタデータを含むファイル。なお、参照先は、Sidetreeのトランザクションとしてブロックチェーンに記載されている。 |
 | Batch file            | The file containing all the operation data batched together.                   |
+|                       | 共にバッチ処理される全てのオペレーションデータを含むファイル |
 | CAS                   | Same as DCAS.                                                                  |
+|                       | DCASの説明を参照 |
 | DCAS                  | Distributed content-addressable storage.                                       |
+|                       | 分散型のcontent-addressable storage |
 | DID Document          | A document containing metadata of a DID, see [DID specification](https://w3c-ccg.github.io/did-spec/). |
+|                       | DIDのメタデータを含むドキュメント([DID specification](https://w3c-ccg.github.io/did-spec/)を参照) | 
 | DID unique suffix     | The unique portion of a DID. e.g. The unique suffix of 'did:sidetree:abc' would be 'abc'. |
+|                       | DID等のユニークな部分。'did:sidetree:abc'というユニークなサフィックスがあった場合、'abc'の部分を指す |
 | Operation             | A change to a DID Document.                                                    |
+|                       | DIDドキュメントに変化を与える関数 |
 | Operation hash        | The hash of the encoded payload of an _operation request_.                     |
+|                       | オペレーションリクエストのエンコードされたペイロードのハッシュ |
 | Operation request     | A JWS formatted request sent to a Sidetree node to perform an _operation_.     |
+|                       | Operationを実行するためのSidetreeノードに送信するためのJWS形式のリクエスト |
 | Original DID Document | A DID Document that is used in create operation to generate the DID.           |
+|                       | DIDを生成するための『Create Operation』で使用されるDIDドキュメント |
 | Recovery key          | A key that is used to perform recovery or delete operation.                    |
+|                       | 復元、もしくは削除するためのOperationを実行するために使用される鍵 |
 | Sidetree node         | A logical server executing Sidetree protocol rules.                            |
+|                       | Sidetreeプロトコルの処理を実行する論理サーバ |
 | Transaction           | A blockchain transaction representing a batch of Sidetree operations.          |
+|                       | SidetreeのOperationのバッチを記録したブロックチェーンのトランザクション |
 
 ## Format and Encoding
 * JSON is used as the data encapsulation format.
