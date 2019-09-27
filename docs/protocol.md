@@ -63,16 +63,26 @@ Architecturally, a Sidetree network is a network consisting of multiple logical 
 ## Sidetree Protocol Versioning & Parameters
 Sidetree protocol and parameters are expected to evolve overtime. Each version of the protocol will define its protocol rules and parameters, and the logical _blockchain time_ in which the new rules and parameters will take effect. All subsequent transactions will adhere to the same rules and parameters until a newer protocol version is defined.
 
+Sidetreeのプロトコルとパラメータは、時間を経るごとに発展することを期待されています。プロトコルのバージョン毎に、ルールとパラメータを定義する予定であり、新たなルールとパラメータをもつ論理的なブロックチェーンの時間が効力を発揮する予定である。全ての次のトランザクションは、新たなプロトコルのバージョンで定義されるまで同じルールとパラメータを遵守する予定である。
+
 The following lists the parameters used by this version of the Sidetree protocol:
+
+このバージョンのSidetreeプロトコルで利用されるパラメータのリストは下記の通りである。
 
 | Protocol Parameter          | Description                                                                    | Value      |
 |-----------------------------|--------------------------------------------------------------------------------| ---------: |
 | Hash algorithm              | The hash algorithm for computation such as for DID generation.                 |     SHA256 |
+|                             | DIDを生成する等に使用するハッシュ計算のアルゴリズム |  |
 | Maximum anchor file size    | The maximum compressed anchor file size.                                       |       1 MB |
+|                             | 圧縮されたanchor fileの最大ファイルサイズ |  |
 | Maximum batch file size     | The maximum compressed batch file size.                                        |      20 MB |
+|                             | 圧縮されたbatch fileの最大ファイルサイズ |  |
 | Maximum encoded hash length | The maximum accepted string length of an encoded hash.                         |        100 |
+|                             | エンコードされたハッシュ値の文字数の最大値 |  |
 | Maximum operation size      | The maximum uncompressed operation size.                                       |      2 000 |
+|                             | Operationの関数サイズの最大(非圧縮) |  |
 | Maximum operation count     | The maximum number of operations per batch.                                    |     10 000 |
+|                             | バッチごとに実行できるオペレーションの最大数 |  |
 
 ## Sidetree Operations
 
