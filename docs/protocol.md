@@ -2,6 +2,8 @@
 
 This specification document describes the Sidetree protocol, which can be applied to any decentralized ledger system (e.g. Bitcoin) to create a 'Layer 2' PKI network. Identifiers and PKI metadata in the protocol are expressed via the emerging [_Decentralized Identifiers_](https://w3c-ccg.github.io/did-spec/) standard, and implementations of the protocol can be codified as their own distinct DID Methods. Briefly, a _DID Method_ is a deterministic mechanism for creating unique identifiers and managing metadata (_DID Documents_) associated with these identifiers, without the need for a centralized authority, denoted by unique prefixes that distinguish one DID Method's identifiers from another (`did:foo`, `did:bar`, etc.).
 
+この仕様書は、Sidetreeプロトコル(Bitcoinのような分散台帳システムのLayer2技術によってPKIネットワークを提供するプロトコル)の説明をしている。プロトコル中で扱われるアイデンティティ情報とPKIのメタデータは、新たなDecentralized Identifireの標準として表現され、プロトコルの実装は、それら自身のDIDメソッドとして体系化されることができる。手短に説明すると、DIDメソッドは、ユニークなアイデンティティ情報を作成し、作成されたアイデンティティ情報(中央的な承認者は必要ない)のメタデータ(DIDドキュメント)を管理し、(`did:foo`,`did:bar`のように)他のDIDメソッドのアイデンティティ情報と区別されたユニークな識別子によって示された決定論的メカニズムである。
+
 ## Overview
 
 Using blockchains for anchoring and tracking unique, non-transferable, digital entities is a useful primitive, but the current strategies for doing so suffer from severely limited transactional performance constraints. Sidetree is a layer-2 protocol for anchoring and tracking _[DID Documents](https://w3c-ccg.github.io/did-spec/)_ across a blockchain. The central design idea involves batching multiple _DID Document_ operations into a single blockchain transaction. This allows Sidetree to inherit the immutability and verifiability guarantees of blockchain without being limited by its transaction rate.
