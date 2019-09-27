@@ -54,6 +54,11 @@ Architecturally, a Sidetree network is a network consisting of multiple logical 
 * Base64URL encoding is used whenever encoding is needed for binary data or cryptographic consistency.
 * [_Multihash_](https://multiformats.io/multihash/) is used to represent hashes.
 
+---
+
+* JSON: データをカプセル化するフォーマットとして利用
+* Base64URLエンコード: バイバリデータ、もしくは暗号データに必要となるエンコーディングとして利用 
+* [_Multihash_](https://multiformats.io/multihash/): トランザクションのハッシュ値に利用
 
 ## Sidetree Protocol Versioning & Parameters
 Sidetree protocol and parameters are expected to evolve overtime. Each version of the protocol will define its protocol rules and parameters, and the logical _blockchain time_ in which the new rules and parameters will take effect. All subsequent transactions will adhere to the same rules and parameters until a newer protocol version is defined.
