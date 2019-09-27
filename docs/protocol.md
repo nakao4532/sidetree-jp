@@ -89,13 +89,21 @@ The following lists the parameters used by this version of the Sidetree protocol
 A [_DID Document_](https://w3c-ccg.github.io/did-spec/#ex-2-minimal-self-managed-did-document
 ) is a document containing information about a DID, such as the public keys of the DID owner and service endpoints used. Sidetree protocol enables the creation of, lookup for, and updates to DID Documents through _Sidetree operations_. All operations are authenticated with a signature using a key specified in the corresponding DID Document.
 
+DIDドキュメントは、DIDについての情報(DID保持者の公開鍵や利用しているサービスのエンドポイント等)が含まれているドキュメントである。Sidetreeプロトコルは、DIDドキュメントをSidetree Operationを通して、作成、参照、更新ができるようになっている。全てのoperationは、DIDドキュメントに対応している鍵を利用して署名され、認証されている。
+
 An update operation to a DID Document contains only the changes from the previous version of the DID Document.
 
+DIDドキュメントを更新するoperationは、DIDドキュメントの前のバージョンから変更することのみ許容している。
+
 > NOTE: Create and recover operations require a complete DID Document as input.
+
+> NOTE: 作成と復元のoperationは全てのDIDドキュメントを入力として要求している
 
 ### Sidetree Operation Hashes
 
 An _operation hash_ is the hash of the _encoded payload_ of a Sidetree operation request. The exact request schema for all operations are defined in [Sidetree REST API](#sidetree-rest-api) section. With the exception of the create operation, each operation must reference the previous operation using the _operation hash_, forming a chain of change history.
+
+operation hashは、Sidetree operationのリクエストをペイロードにエンコードし、ハッシュ化したものである。全てのoperationの正確な要求内容は、[Sidetree REST APIセクション](#sidetree-rest-api)で定義されている。create operationを例外として、それぞれのoperationは、前回のoperationを参照(operation hashの形式となっている(変更履歴のチェーンフォーマット))しなければならない。
 
 ## Sidetree DID and Original DID Document
 A Sidetree DID is intentionally the hash of the encoded DID Document given as the create operation payload (_original DID Document_), prefixed by the Sidetree method name. Given how _operation hash_ is computed, A DID is also the operation hash of the initial create operation.
