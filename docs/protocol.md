@@ -8,7 +8,15 @@ This specification document describes the Sidetree protocol, which can be applie
 
 Using blockchains for anchoring and tracking unique, non-transferable, digital entities is a useful primitive, but the current strategies for doing so suffer from severely limited transactional performance constraints. Sidetree is a layer-2 protocol for anchoring and tracking _[DID Documents](https://w3c-ccg.github.io/did-spec/)_ across a blockchain. The central design idea involves batching multiple _DID Document_ operations into a single blockchain transaction. This allows Sidetree to inherit the immutability and verifiability guarantees of blockchain without being limited by its transaction rate.
 
+固定すること、識別子を追跡すること、譲渡できないこと、電子化することに対して、ブロックチェーンを使用することは、原始的に使いやすいが、しかし、現状は、トランザクション処理の性能に限界が存在することが問題となっている。Sidetreeは、DIDドキュメントの所持と追跡をブロックチェーンを通じて行うLayer-2技術を利用したプロトコルである。設計案の中心的な考え方には、複数のDIDドキュメントを単一のブロックチェーントランザクションにバッチ処理することが含まれている。これにより、Sidetreeプロトコルは、トランザクションレートによって制限されることなく、ブロックチェーンの不変性と検証可能性の保証を継承することができる。
+
 Architecturally, a Sidetree network is a network consisting of multiple logical servers (_Sidetree nodes_) executing Sidetree protocol rules, overlaying a blockchain network as illustrated by the above figure. Each _Sidetree node_ provides service endpoints to perform _operations_ (e.g. Create, Resolve, Update, and Delete) against _DID Documents_. The blockchain consensus mechanism helps serialize Sidetree operations published by different nodes and provide a consistent view of the state of all _DID Documents_ to all Sidetree nodes, without requiring its own consensus layer. The Sidetree protocol batches multiple operations in a single file (_batch file_) and stores the _batch files_ in a _distributed content-addressable storage (DCAS or CAS)_. A reference to the operation batch is then anchored on the blockchain. The actual data of all batched operations are stored as one . Anyone can run a CAS node without running a Sidetree node to provide redundancy of Sidetree _batch files_.
+
+システム構成として、Sidetreeネットワークは、上記の図によって描かれたブロックチェーンのオーバーレイネットワークに参加している複数のSidetreeプロトコルのルールを実行する論理サーバ(Sidetree Node)からなるネットワークである。それぞれのSidetree Nodeは、DIDドキュメントに対してオペレーション(作成、解決、更新、削除等)を実行するためのサービスエンドポイントを提供する。ブロックチェーンのコンセンサスメカニズムは、異なるノードによって実行されるSidetreeのオペレーションを直列化する助けとなっており、自分たちで合意形成アルゴリズムを実現する必要なく、全てのSidetreeノードで、全てのDIDドキュメントの状態を一貫して確認できるようにしている。Sidetreeプロトコルは、複数のオペレーションを１つのファイル(batch file)で実行しており、batch fileは、(DCASもしくはCASと呼ばれる)分散型のcontent-addressable storageに保存している。オペレーションバッチへの参照アドレスは、ブロックチェーン上で固定されて保存されている。全てのバッチオペレーションの実際のデータは、１つであるように保存されている。Sidetreeのバッチファイルの冗長性を提供するため、誰でもSidetreeノートを実行することなしにCASを実行することができる。
+
+> 補足:
+> * content-addressable storage:  
+> データ(コンテンツ)とポインタ(アドレス)をリンクして保存し、さらに一定期間に渡ってデータを更新や修正することができないストレージ。もしデータを更新する場合は、新たなデータを登録し、参照するためのアドレスを変更する。(多分、QLDBのようなストレージを指す)
 
 ## Terminology
 
