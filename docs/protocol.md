@@ -108,7 +108,11 @@ operation hashは、Sidetree operationのリクエストをペイロードにエ
 ## Sidetree DID and Original DID Document
 A Sidetree DID is intentionally the hash of the encoded DID Document given as the create operation payload (_original DID Document_), prefixed by the Sidetree method name. Given how _operation hash_ is computed, A DID is also the operation hash of the initial create operation.
 
+Sidetree DIDは、Sidetreeメソッド名によって識別子を与えられており、意図的にcreate operationのペイロード(オリジナルのDIDドキュメント)であるDIDドキュメントをエンコードしたものをハッシュにしている。operation hashの計算方法を考えると、DIDは初期のcreate operationのoperation hashであるとも言える。
+
 Since the requester is in control of the _original DID Document_, the requester can deterministically calculate the DID before the create operation is anchored on the blockchain.
+
+要求者が、原初のDIDドキュメントのコントロール権を持っているため、要求者は、create operationがブロックチェーン上で紐づけられる前にDIDを決定的アルゴリズムで計算することができる。
 
 A valid _original DID Document_ must be a valid generic DID Document that adheres to the following additional Sidetree protocol specific rules:
 1. The document must NOT have the `id` property.
@@ -117,8 +121,16 @@ A valid _original DID Document_ must be a valid generic DID Document that adhere
 4. Can have `service` property.
 5. If an Identity Hub `serviceEndpoint` is desired, an entry must exist in the `service` array that conforms to the Identity Hub Service Endpoint descriptor schema.
 
+オリジナルのDIDドキュメントは、Sidetreeプロトコルの仕様通りに、下記の項目に準拠するDIDドキュメントを生成する必要があります。
+1. ドキュメントは、`id` プロパティを持ってはいけない
+2. ドキュメントは、最低1つ以上の `publicKey` の配列プロパティを含まなければならない。
+3. `publicKey` 項目の `id` プロパティは、仕様通りのフラグメントでなければならない
+4. `service` プロパティを持つことができる
+5. もし、アイデンティティハブである、 `serviceEndpoint` が望まれている場合、エントリーは、アイデンティティハブとなるサービスの説明を確認することができる `service` という名前の配列を必ず用意する必要がある。
+
 See [DID Create API](#original-did-document-example) section for an example of an original DID Document.
 
+[DID Create API](#original-did-document-example) セクションで、original DIDドキュメントの例を確認できます。
 
 ## Sidetree Operation Batching
 The Sidetree protocol increases operation throughput by batching multiple operations together then anchoring a reference to this batch on the blockchain.
@@ -778,4 +790,3 @@ Where the first entry in ```receipt``` is the sibling of the operation hash in t
 * Why assign a _transaction number_ to invalid transactions?
 
   In the case of an _unresolvable transaction_, it is unknown if the transaction will be valid or not if it becomes resolvable, thus it is assigned a transaction number such that if the transaction turns out to be valid, the transaction number of valid transactions that occur at a later time remain immutable. This also enables all Sidetree nodes to refer to the same transaction using the same transaction number.
-
