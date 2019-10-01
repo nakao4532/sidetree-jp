@@ -142,6 +142,13 @@ For every batch of Sidetree operations created, there are two files that are cre
     2. Array of DID suffixes (the unique portion of the DID string that differentiates one DID from another) for all DIDs that are declared to have operations within the associated _batch file_.
     3. The Merkle Root of the tree constructed from all the operations in the batch file, to aid in proving an operation was included in a given transaction with minimal overhead.
 
+Sidetreeプロトコルは、ブロックチェーン上でバッチの参照先を固定し、複数のオペレーションを共にバッチ処理することにより、operationのスループットを増やしている。
+Sidetree operetionsによって作成された全てのバッチ処理にとって、作成され、CASレイヤー時保存される2つのファイルが存在する。
+1. Batch file - 
+2. Anchor file - 
+   1. Sidetree operationに関係のあるメタデータは、batch fileのoperationのハッシュをアドレスとして追加している
+   2. DIDのサフィックス(他のDIDから異なるDIDとして識別されるDIDの文字列のユニークな部品)の配列
+
 ### Batch File Schema
 The _batch file_ is a ZIP compressed JSON document of the following schema:
 ```json
