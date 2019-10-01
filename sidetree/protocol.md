@@ -143,14 +143,17 @@ For every batch of Sidetree operations created, there are two files that are cre
     3. The Merkle Root of the tree constructed from all the operations in the batch file, to aid in proving an operation was included in a given transaction with minimal overhead.
 
 Sidetreeプロトコルは、ブロックチェーン上でバッチの参照先を固定し、複数のオペレーションを共にバッチ処理することにより、operationのスループットを増やしている。
-Sidetree operetionsによって作成された全てのバッチ処理にとって、作成され、CASレイヤー時保存される2つのファイルが存在する。
-1. Batch file - 
-2. Anchor file - 
-   1. Sidetree operationに関係のあるメタデータは、batch fileのoperationのハッシュをアドレスとして追加している
+Sidetree operetionsによって作成された全てのバッチ処理にとって、作成され、CASレイヤにー時保存される2つのファイルが存在する。
+1. Batch file - バッチ処理された全てのoperationと、その実際の変更データを共に含むファイル
+2. Anchor file - anchor fileのハッシュは、Sidetreeのトランザクションとして、ブロックチェーンに記載されている。このため、「_anchor_」という名前である。このファイルは下記の内容を含んでいる。
+   1. Sidetree operationに関係のあるメタデータは、batch fileのoperationのハッシュをアドレスとして追加する
    2. DIDのサフィックス(他のDIDから異なるDIDとして識別されるDIDの文字列のユニークな部品)の配列
+   3. バッチファイルの全てのoperationから構築されているMerkleツリーのルートは、最小限のオーバーヘッドで特定のトランザクションが含まれていることを証明するのに役立ちます。
 
 ### Batch File Schema
 The _batch file_ is a ZIP compressed JSON document of the following schema:
+
+_batch file_は下記のスキームを持つJSONドキュメントであり、ZIP圧縮されている:
 ```json
 {
   "operations": [
@@ -163,6 +166,8 @@ The _batch file_ is a ZIP compressed JSON document of the following schema:
 
 ### Anchor File Schema
 The _anchor file_ is a JSON document of the following schema:
+
+_anchor file_は下記のスキームを持つのJSONドキュメントである。:
 ```json
 {
   "batchFileHash": "Encoded multihash of the batch file.",
@@ -171,6 +176,8 @@ The _anchor file_ is a JSON document of the following schema:
 }
 ```
 > NOTE: See [Sidetree Operation Receipts](#Sidetree-Operation-Receipts) section on purpose and construction of the `merkleRoot`.
+
+> NOTE: `merkleRoot` の目的と構造については、[Sidetree Operation Receipts](#Sidetree-Operation-Receipts)セクションに記載している。
 
 ### Operation chaining of a DID
 ![DID Operation Chaining](https://raw.githubusercontent.com/decentralized-identity/sidetree/7c9e381063dc1e6121035940d30b1380bb0cf124/docs/diagrams/operationChaining.png)
